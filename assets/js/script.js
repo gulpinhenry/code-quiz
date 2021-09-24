@@ -11,11 +11,11 @@
 // timer, when time reaches zero from user to fill out form to insert initials for saving highscores
 var time = document.getElementById("time");
 var timeLeft = 11;
-
 /**
  * creates a timer that updates index.html's time element every second
  */
 function decreaseTime() {
+    console.log(timeLeft);
     var timer = setInterval(function(){
         timeLeft--;
         time.textContent = "Time left: " + timeLeft;
@@ -25,7 +25,7 @@ function decreaseTime() {
         }
         
         
-        console.log(timeLeft);
+        
         
     }, 1000);
 }
@@ -42,8 +42,12 @@ function displayForm(){
     //display the form
 
     //change the number to the starting time value tp get total number of seconds used to take the quiz
-    timeLeft = 10-timeLeft;
+    var timeExpended = 10-timeLeft;
 
     //prompt for initials and display time and all that stuff
 }
+
+
+// call functions here
+decreaseTime();
 
