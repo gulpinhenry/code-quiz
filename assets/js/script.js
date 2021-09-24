@@ -33,7 +33,7 @@ function decreaseTime() {
 // logic of the quiz
 
 
-// logic of the ending of the quiz, if the quiz is finished before the actual time limit, you need to display form then
+// logic of the ending of the quiz, if the quiz is finished before the actual time limit, you need to display form then, as well if the quiz is not finished in time
 
 /**
  * displays the form which prompts the user for their initials, as saves their respective time to under their initials, which will be updated to leaderboard
