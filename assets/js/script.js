@@ -10,7 +10,7 @@
 
 // timer, when time reaches zero from user to fill out form to insert initials for saving highscores
 var time = document.getElementById("time");
-var timeLeft = 11;
+var timeLeft = 61;
 /**
  * creates a timer that updates index.html's time element every second
  */

@@ -1,0 +1,13 @@
+*{
+    font-family: 'Lucida Console', 'Monaco', monospace;
+}
+
+header{
+    display: flex;
+    background-color: gainsboro;
+}
+header h6{
+
+    margin: 20px auto 20px auto;
+    
+}
