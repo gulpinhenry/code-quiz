@@ -14,8 +14,16 @@ var descContainer = document.getElementById("desc-container");
 var botContainer = document.getElementById("bottom-container");
 var highScores = document.getElementById("high-scores");
 
+var a = document.createElement("button");
+var b = document.createElement("button");
+var c = document.createElement("button");
+var d = document.createElement("button"); //choices
+
+var ans = ""; //answer
+
 var timeLeft = 60;
 var finishedTime = 0;
+var clicked = false; //checks to see if options are clicked
 
 //create list of questions
 var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
@@ -29,13 +37,44 @@ var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
 ,["q9", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
 ,["q10", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]];
 
+
+a.addEventListener("click", function() {
+    ans = a.textContent;
+    a.remove();
+    b.remove();
+    c.remove();
+    d.remove();
+    clicked = true;
+}); 
+b.addEventListener("click", function() {
+    ans = b.textContent;
+    a.remove();
+    b.remove();
+    c.remove();
+    d.remove();
+    clicked = true;
+}); 
+c.addEventListener("click", function() {
+    ans = c.textContent;
+    a.remove();
+    b.remove();
+    c.remove();
+    d.remove();
+    clicked = true;
+}); 
+d.addEventListener("click", function() {
+    ans = d.textContent;
+    a.remove();
+    b.remove();
+    c.remove();
+    d.remove();
+    clicked = true;
+}); 
+
 function renderQuiz(i){
     title.textContent = arr[i-1][0];
     //add buttons to dom
-    var a = document.createElement("button");
-    var b = document.createElement("button");
-    var c = document.createElement("button");
-    var d = document.createElement("button");
+
     a.setAttribute("class", "quiz-choices"); //add to css later
     b.setAttribute("class", "quiz-choices");
     c.setAttribute("class", "quiz-choices");
@@ -49,36 +88,7 @@ function renderQuiz(i){
     descContainer.appendChild(c);
     descContainer.appendChild(d);
     //check for user input
-    var ans = -1;
-
-    a.addEventListener("click", function() {
-        ans = a.textContent;
-        a.remove();
-        b.remove();
-        c.remove();
-        d.remove();
-    }); 
-    b.addEventListener("click", function() {
-        ans = b.textContent;
-        a.remove();
-        b.remove();
-        c.remove();
-        d.remove();
-    }); 
-    c.addEventListener("click", function() {
-        ans = c.textContent;
-        a.remove();
-        b.remove();
-        c.remove();
-        d.remove();
-    }); 
-    d.addEventListener("click", function() {
-        ans = d.textContent;
-        a.remove();
-        b.remove();
-        c.remove();
-        d.remove();
-    }); 
+    ans = arr[i-1][1];
 
 
     //check to see if its valid
@@ -97,7 +107,11 @@ function startQuiz(){
         //check to see if question is right or wrong, change time, create feedback
         var feedback = document.createElement("h3");
         feedback.setAttribute("id", "feedback");
-
+        if(timeLeft<=0)
+        {
+            finishedTime = 0;
+            displayForm();
+        }
         if(arr[i-1][1] == n)
         {
             feedback.textContent = "correct!";
@@ -106,17 +120,19 @@ function startQuiz(){
         {
             feedback.textContent = "wrong!";
             //display incorrect
+            timeLeft -= 10;
             //change time
         }
-
+        setTimeout(function(){ feedback.remove();
+        }, 500);
         botContainer.appendChild(feedback);
 
     }
-        
+    finishedTime = timeLeft;   
     //
 
     //in the event that the user finishes before the time runs out
-    finishedTime = timeLeft;
+    
 }
 
 
@@ -137,7 +153,7 @@ function displayForm(){
 }
 
 function displayHighScores(){
-
+    
 }
 
 //render home screen
@@ -163,7 +179,7 @@ function displayHome(){
         var timer = setInterval(function(){
             timeLeft--;
             time.textContent = "Time left: " + timeLeft;
-            if(timeLeft == 0){
+            if(timeLeft <= 0){
                 clearInterval(timer);
                 finishedTime = timeLeft;
                 displayForm();
