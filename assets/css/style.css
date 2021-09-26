@@ -28,3 +28,16 @@ header{
 #description{
     font-size: 40px;
 }
+
+#desc-container{
+    /*border: solid black 15px;*/
+}
+
+#bottom-container{
+    /*border: solid black 15px;*/
+}
+
+/* for initials*/
+form{
+
+}

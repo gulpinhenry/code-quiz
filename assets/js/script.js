@@ -96,7 +96,7 @@ function renderQuiz(i){
     return ans;
 }
 
-// logic of the quiz
+// redo logic of quiz
 function startQuiz(){
     highScores.disabled = true;
     console.log("Game started");
@@ -128,13 +128,22 @@ function startQuiz(){
         botContainer.appendChild(feedback);
 
     }
-    finishedTime = timeLeft;   
-    //
+    finishedTime = timeLeft;
+    //timeLeft = 0;
+    displayForm();   
+    
 
     //in the event that the user finishes before the time runs out
     
 }
 
+// just a function for debugging purposes, to clear all containers
+function clearContainer(){
+    title.textContent = "clear content";
+    descContainer.innerHTML = '';
+    botContainer.innerHTML = '';
+
+}
 
 // logic of the ending of the quiz, if the quiz is finished before the actual time limit, you need to display form then, as well if the quiz is not finished in time
 
@@ -143,21 +152,50 @@ function startQuiz(){
  */
 function displayForm(){
     console.log("game finished");
+    clearContainer();
+    title.textContent="All Done!";
+    var finScore = document.createElement("h3");
+    var form = document.createElement("form");
+    var formLabel = document.createElement("label")
+    var initials = document.createElement("input");
+    var submit = document.createElement("input");
+
+    finScore.textContent = "Score: " + finishedTime;
+    descContainer.appendChild(finScore);
+
+    formLabel.textContent = "Enter Initials: "
+    initials.setAttribute("type", "text");
+    submit.setAttribute("type", "submit");
+    submit.value = "ok";
+
+
+
+    botContainer.appendChild(form);
+    form.appendChild(formLabel);
+    form.appendChild(initials);
+    form.appendChild(submit);
+    // this will change the leaderboard the same person with same initials beats their previous high scoire
+    submit.addEventListener("click", function(){
+        if(!localStorage.getItem(initials.value))
+            localStorage.setItem(initials.value, finishedTime);
+        else if(localStorage.getItem(initials.value)<finishedTime)
+            localStorage.setItem(initials.value, finishedTime);
+    });
     //display the form clear all other elements on the page
 
 
 
     //prompt for initials and display time and add to local storage, buttons for homescreen, which resets time, resetting to deafult page
-
     //if user clicks play again, go back to landing page, make highScores.disabled = false;
 }
 
 function displayHighScores(){
-    
+    title.textContent = "High Scores";
 }
 
 //render home screen
 function displayHome(){
+    timeLeft = 60;
     title.textContent = "Code Quiz Game";
     // create description
     var desc = document.createElement("h3");
@@ -181,7 +219,7 @@ function displayHome(){
             time.textContent = "Time left: " + timeLeft;
             if(timeLeft <= 0){
                 clearInterval(timer);
-                finishedTime = timeLeft;
+                time.textContent = "Time left: --";
                 displayForm();
             }
         }, 1000);
