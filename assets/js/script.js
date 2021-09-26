@@ -5,17 +5,23 @@
  * This script facilitates index.html, which displays a quiz interface with timers and a saved collection of high scores
  */
 
-// add feature of displaying high score for "view high score"
 
 
 // timer, when time reaches zero from user to fill out form to insert initials for saving highscores
 var time = document.getElementById("time");
+var title = document.getElementById("title");
+var descContainer = document.getElementById("desc-container");
+var botContainer = document.getElementById("bottom-container");
+var highScores = document.getElementById("high-scores")
+var start = document.getElementById("start")
+
 var timeLeft = 60;
 /**
  * creates a timer that updates index.html's time element every second
  */
 function decreaseTime() {
     console.log(timeLeft);
+    startQuiz();
     var timer = setInterval(function(){
         timeLeft--;
         time.textContent = "Time left: " + timeLeft;
@@ -23,23 +29,25 @@ function decreaseTime() {
             clearInterval(timer);
             displayForm();
         }
-        
-        
-        
-        
     }, 1000);
 }
 
 /**
  * Button used to start the timer and effectively loading the next pages
  */
-var start = document.getElementById("start");
-start.addEventListener("click", function () {
-    decreaseTime();
-  })
+
 
 
 // logic of the quiz
+function startQuiz(){
+    highScores.disabled = true;
+    console.log("Game started");
+    //render buttons, render question, get rid of all of the stuff on there
+
+    //check to see if question is right or wrong, change time, create feedback
+
+    //check to see if the quiz is finished or not
+}
 
 
 // logic of the ending of the quiz, if the quiz is finished before the actual time limit, you need to display form then, as well if the quiz is not finished in time
@@ -48,15 +56,22 @@ start.addEventListener("click", function () {
  * displays the form which prompts the user for their initials, as saves their respective time to under their initials, which will be updated to leaderboard
  */
 function displayForm(){
-    //display the form
+    console.log("game finished");
+    //display the form clear all other elements on the page
 
-    //change the number to the starting time value tp get total number of seconds used to take the quiz
-    var timeExpended = 10-timeLeft;
 
-    //prompt for initials and display time and all that stuff
+
+    //prompt for initials and display time and add to local storage, buttons for homescreen, which resets time, resetting to deafult page
+
+    //if user clicks play again, go back to landing page, make highScores.disabled = false;
+}
+
+function displayHighScores(){
+
 }
 
 
 // call functions here
-
+start.addEventListener("click",decreaseTime); 
+highScores.addEventListener("click", displayHighScores);
 

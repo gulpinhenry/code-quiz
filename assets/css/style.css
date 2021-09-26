@@ -5,10 +5,12 @@
 header{
     display: flex;
     background-color: gainsboro;
+    justify-content: space-between;
+    
 }
-header h6{
+.heading{
 
-    margin: 20px auto 20px auto;
+    margin: 20px 10px 30px 10px;
 }
 
 #container{
