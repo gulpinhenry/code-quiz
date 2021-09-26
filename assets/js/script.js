@@ -18,13 +18,72 @@ var timeLeft = 60;
 var finishedTime = 0;
 
 //create list of questions
-var arr = [["q1", "ans1"],["q2", "ans2"]];
+var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
+["q2", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q3", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q4", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q5", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q6", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q7", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q8", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q9", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
+,["q10", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]];
 
-function renderQuiz(){
-    title.textContent = "game has started";
+function renderQuiz(i){
+    title.textContent = arr[i-1][0];
+    //add buttons to dom
+    var a = document.createElement("button");
+    var b = document.createElement("button");
+    var c = document.createElement("button");
+    var d = document.createElement("button");
+    a.setAttribute("class", "quiz-choices"); //add to css later
+    b.setAttribute("class", "quiz-choices");
+    c.setAttribute("class", "quiz-choices");
+    d.setAttribute("class", "quiz-choices");
+    a.textContent = arr[i-1][2];
+    b.textContent = arr[i-1][3];
+    c.textContent = arr[i-1][4];
+    d.textContent = arr[i-1][5];
+    descContainer.appendChild(a);
+    descContainer.appendChild(b);
+    descContainer.appendChild(c);
+    descContainer.appendChild(d);
+    //check for user input
+    var ans = -1;
 
-    var ans = 0;
-    return ans
+    a.addEventListener("click", function() {
+        ans = a.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+    b.addEventListener("click", function() {
+        ans = b.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+    c.addEventListener("click", function() {
+        ans = c.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+    d.addEventListener("click", function() {
+        ans = d.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+
+
+    //check to see if its valid
+    
+    return ans;
 }
 
 // logic of the quiz
@@ -32,23 +91,32 @@ function startQuiz(){
     highScores.disabled = true;
     console.log("Game started");
     //render buttons, render question, get rid of all of the stuff on there
-    for(var i = 1; i<=10; i++)
+    for(var i = 1; i<=arr.length; i++)
     {
         var n = renderQuiz(i);
         //check to see if question is right or wrong, change time, create feedback
-        if(ans[i][1] == n)
-            //display correct
+        var feedback = document.createElement("h3");
+        feedback.setAttribute("id", "feedback");
+
+        if(arr[i-1][1] == n)
+        {
+            feedback.textContent = "correct!";
+        }
         else
         {
+            feedback.textContent = "wrong!";
             //display incorrect
-            //change feedback
+            //change time
         }
+
+        botContainer.appendChild(feedback);
 
     }
         
     //
 
-    //check to see if the quiz is finished or not
+    //in the event that the user finishes before the time runs out
+    finishedTime = timeLeft;
 }
 
 
@@ -97,6 +165,7 @@ function displayHome(){
             time.textContent = "Time left: " + timeLeft;
             if(timeLeft == 0){
                 clearInterval(timer);
+                finishedTime = timeLeft;
                 displayForm();
             }
         }, 1000);
