@@ -12,39 +12,41 @@ var time = document.getElementById("time");
 var title = document.getElementById("title");
 var descContainer = document.getElementById("desc-container");
 var botContainer = document.getElementById("bottom-container");
-var highScores = document.getElementById("high-scores")
-var start = document.getElementById("start")
+var highScores = document.getElementById("high-scores");
 
 var timeLeft = 60;
-/**
- * creates a timer that updates index.html's time element every second
- */
-function decreaseTime() {
-    console.log(timeLeft);
-    startQuiz();
-    var timer = setInterval(function(){
-        timeLeft--;
-        time.textContent = "Time left: " + timeLeft;
-        if(timeLeft == 0){
-            clearInterval(timer);
-            displayForm();
-        }
-    }, 1000);
+var finishedTime = 0;
+
+//create list of questions
+var arr = [["q1", "ans1"],["q2", "ans2"]];
+
+function renderQuiz(){
+    title.textContent = "game has started";
+
+    var ans = 0;
+    return ans
 }
-
-/**
- * Button used to start the timer and effectively loading the next pages
- */
-
-
 
 // logic of the quiz
 function startQuiz(){
     highScores.disabled = true;
     console.log("Game started");
     //render buttons, render question, get rid of all of the stuff on there
+    for(var i = 1; i<=10; i++)
+    {
+        var n = renderQuiz(i);
+        //check to see if question is right or wrong, change time, create feedback
+        if(ans[i][1] == n)
+            //display correct
+        else
+        {
+            //display incorrect
+            //change feedback
+        }
 
-    //check to see if question is right or wrong, change time, create feedback
+    }
+        
+    //
 
     //check to see if the quiz is finished or not
 }
@@ -70,8 +72,38 @@ function displayHighScores(){
 
 }
 
+//render home screen
+function displayHome(){
+    title.textContent = "Code Quiz Game";
+    // create description
+    var desc = document.createElement("h3");
+    desc.setAttribute("id", "description"); //used to style in css
+    desc.textContent = "description here";
+    descContainer.appendChild(desc);
+    // create button
+    var start = document.createElement("button");
+    start.textContent = "Play";
+    botContainer.appendChild(start);
 
-// call functions here
-start.addEventListener("click",decreaseTime); 
+    //when the start button is clicked, the timer starts and the button disappears
+    start.addEventListener("click", function decreaseTime(event) {
+        var element = event.target;
+        console.log(timeLeft);
+        start.remove();
+        startQuiz();
+
+        var timer = setInterval(function(){
+            timeLeft--;
+            time.textContent = "Time left: " + timeLeft;
+            if(timeLeft == 0){
+                clearInterval(timer);
+                displayForm();
+            }
+        }, 1000);
+    }); 
+}
+
+displayHome();
+
 highScores.addEventListener("click", displayHighScores);
 
