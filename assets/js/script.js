@@ -39,38 +39,7 @@ var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
 ,["q10", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]];
 
 
-a.addEventListener("click", function() {
-    ans = a.textContent;
-    a.remove();
-    b.remove();
-    c.remove();
-    d.remove();
-    clicked = true;
-}); 
-b.addEventListener("click", function() {
-    ans = b.textContent;
-    a.remove();
-    b.remove();
-    c.remove();
-    d.remove();
-    clicked = true;
-}); 
-c.addEventListener("click", function() {
-    ans = c.textContent;
-    a.remove();
-    b.remove();
-    c.remove();
-    d.remove();
-    clicked = true;
-}); 
-d.addEventListener("click", function() {
-    ans = d.textContent;
-    a.remove();
-    b.remove();
-    c.remove();
-    d.remove();
-    clicked = true;
-}); 
+
 
 function renderQuiz(i){
     title.textContent = arr[i-1][0];
@@ -88,8 +57,38 @@ function renderQuiz(i){
     descContainer.appendChild(b);
     descContainer.appendChild(c);
     descContainer.appendChild(d);
+
+    a.addEventListener("click", function() {
+        ans = a.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+    b.addEventListener("click", function() {
+        ans = b.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+    c.addEventListener("click", function() {
+        ans = c.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+    d.addEventListener("click", function() {
+        ans = d.textContent;
+        a.remove();
+        b.remove();
+        c.remove();
+        d.remove();
+    }); 
+
     //check for user input
-    ans = arr[i-1][1];
+    ans = arr[i-1][1]; //temporary
 
 
     //check to see if its valid
@@ -102,35 +101,32 @@ function startQuiz(){
     highScores.disabled = true;
     console.log("Game started");
     //render buttons, render question, get rid of all of the stuff on there
-    for(var i = 1; i<=arr.length; i++)
-    {
+    for(var i = 1; i<=arr.length; i++){
         var n = renderQuiz(i);
         //check to see if question is right or wrong, change time, create feedback
         var feedback = document.createElement("h3");
         feedback.setAttribute("id", "feedback");
-        if(timeLeft<=0)
-        {
+        if(timeLeft<=0){ //not sure where to put this, this is when the user runs out of time while in the middle of the quiz
             finishedTime = 0;
             displayForm();
         }
-        if(arr[i-1][1] == n)
-        {
+
+        if(arr[i-1][1] == n){
             feedback.textContent = "correct!";
         }
-        else
-        {
+        else{
             feedback.textContent = "wrong!";
-            //display incorrect
             timeLeft -= 10;
-            //change time
         }
+        //keeps the feedback there for a bit
         setTimeout(function(){ feedback.remove();
         }, 500);
         botContainer.appendChild(feedback);
 
     }
+    //if the user finishes before time hits 0
     finishedTime = timeLeft;
-    //timeLeft = 0;
+    timeLeft = 0;
     displayForm();   
     
 
@@ -223,6 +219,7 @@ function displayHighScores(){
 //render home screen
 function displayHome(){
     clearContainer();
+    highScores.disabled = false;
     timeLeft = 60;
     title.textContent = "Code Quiz Game";
     // create description
