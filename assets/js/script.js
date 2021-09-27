@@ -14,10 +14,7 @@ var descContainer = document.getElementById("desc-container");
 var botContainer = document.getElementById("bottom-container");
 var highScores = document.getElementById("high-scores");
 
-var a = document.createElement("button");
-var b = document.createElement("button");
-var c = document.createElement("button");
-var d = document.createElement("button"); //choices
+
 
 var ans = ""; //answer
 
@@ -44,6 +41,10 @@ var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
 function renderQuiz(i){
     title.textContent = arr[i-1][0];
     //add buttons to dom
+    var a = document.createElement("button");
+    var b = document.createElement("button");
+    var c = document.createElement("button");
+    var d = document.createElement("button"); //choices
 
     a.setAttribute("class", "quiz-choices"); //add to css later
     b.setAttribute("class", "quiz-choices");
@@ -160,9 +161,10 @@ function displayForm(){
     finScore.textContent = "Score: " + finishedTime;
     descContainer.appendChild(finScore);
 
-    formLabel.textContent = "Enter Initials: "
+    formLabel.textContent = "Enter Initials (2 letters): "
     initials.setAttribute("type", "text");
     submit.setAttribute("type", "submit");
+    submit.setAttribute("id", "submit-button");
     submit.value = "ok";
 
 
@@ -171,7 +173,7 @@ function displayForm(){
     form.appendChild(formLabel);
     form.appendChild(initials);
     form.appendChild(submit);
-    // this will change the leaderboard the same person with same initials beats their previous high scoire
+    // this will change the leaderboard the same person with same initials beats their previous high scoire 
     submit.addEventListener("click", function(){
         if(!localStorage.getItem(initials.value) || localStorage.getItem(initials.value)<finishedTime)
         {
@@ -179,12 +181,7 @@ function displayForm(){
         }
             
     });
-    //display the form clear all other elements on the page
 
-
-
-    //prompt for initials and display time and add to local storage, buttons for homescreen, which resets time, resetting to deafult page
-    //if user clicks play again, go back to landing page, make highScores.disabled = false;
 }
 
 function displayHighScores(){
@@ -200,10 +197,14 @@ function displayHighScores(){
     highScores.disabled = true;
     //display list
     for (var i = 0; i < localStorage.length; i++){
-        var li = document.createElement("li");
-        li.textContent = localStorage.key(i) + ":  " + localStorage.getItem(localStorage.key(i));
-        li.setAttribute("data-index", i);
-        board.appendChild(li);
+        if(localStorage.key(i).length == 2) //displays only initials
+        {
+            var li = document.createElement("li");
+            li.textContent = localStorage.key(i) + ":  " + localStorage.getItem(localStorage.key(i));
+            li.setAttribute("data-index", i);
+            board.appendChild(li);
+        }
+        
     }
   
     
@@ -225,7 +226,7 @@ function displayHome(){
     // create description
     var desc = document.createElement("h3");
     desc.setAttribute("id", "description"); //used to style in css
-    desc.textContent = "description here";
+    desc.textContent = "Answer these Javascript-themed questions the best you can in less than a minute! Incorrect answers will be punished. Good luck!";
     descContainer.appendChild(desc);
     // create button
     var start = document.createElement("button");
