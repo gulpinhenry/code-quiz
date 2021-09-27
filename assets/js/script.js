@@ -25,6 +25,7 @@ var timeLeft = 60;
 var finishedTime = 0;
 var clicked = false; //checks to see if options are clicked
 
+
 //create list of questions
 var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
 ["q2", "ans2", "choice 1", "choice 2", "choice 3", "choice 4"]
@@ -139,7 +140,7 @@ function startQuiz(){
 
 // just a function for debugging purposes, to clear all containers
 function clearContainer(){
-    title.textContent = "clear content";
+    title.textContent = "";
     descContainer.innerHTML = '';
     botContainer.innerHTML = '';
 
@@ -176,10 +177,11 @@ function displayForm(){
     form.appendChild(submit);
     // this will change the leaderboard the same person with same initials beats their previous high scoire
     submit.addEventListener("click", function(){
-        if(!localStorage.getItem(initials.value))
+        if(!localStorage.getItem(initials.value) || localStorage.getItem(initials.value)<finishedTime)
+        {
             localStorage.setItem(initials.value, finishedTime);
-        else if(localStorage.getItem(initials.value)<finishedTime)
-            localStorage.setItem(initials.value, finishedTime);
+        }
+            
     });
     //display the form clear all other elements on the page
 
@@ -190,11 +192,37 @@ function displayForm(){
 }
 
 function displayHighScores(){
+    clearContainer();
     title.textContent = "High Scores";
+    var board = document.createElement("ol");
+    board.setAttribute("id", "leaderboard"); //used to style in css
+    descContainer.appendChild(board);
+    // create button
+    var back = document.createElement("button");
+    back.textContent = "back";
+    botContainer.appendChild(back);
+    highScores.disabled = true;
+    //display list
+    for (var i = 0; i < localStorage.length; i++){
+        var li = document.createElement("li");
+        li.textContent = localStorage.key(i) + ":  " + localStorage.getItem(localStorage.key(i));
+        li.setAttribute("data-index", i);
+        board.appendChild(li);
+    }
+  
+    
+      
+    
+    //when the start button is clicked, the timer starts and the button disappears
+    back.addEventListener("click", function(){
+        displayHome();
+        back.remove();
+    });
 }
 
 //render home screen
 function displayHome(){
+    clearContainer();
     timeLeft = 60;
     title.textContent = "Code Quiz Game";
     // create description
