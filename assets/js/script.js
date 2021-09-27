@@ -24,16 +24,11 @@ var timer;
 
 
 //create list of questions
-var arr = [["q1", "real ans", "choice 1111111111111111111111111111111111111111111111111111111111111111111111", "choice 2", "choice 3", "choice 4"],
-["q2", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q3", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q4", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q5", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q6", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q7", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q8", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q9", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
-,["q10", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]];
+var arr = [["What is JavaScript most known for?", "Scripting for Web Pages", "Having similar names with JAVA", "Scripting for Web Pages", "Its fast interpreters", "Its profound use in ML"],
+["Which of the following is not a primitive data type in JavaScript?", "ArrayList", "number", "boolean", "null", "ArrayList"]
+,["What does \"===\" mean?", "equal in value and data type", "equal in value and data type", "same object reference", "equal in value ONLY", "not equal"]
+,["It is common practice to end each line of code with what?", "semicolon", "period", "closing curly brace", "backslash", "semicolon"]
+,["What does Henry find most interesting about JavaScript", "functions within functions", "loose data types", "functions within functions", "undefined instead of index out of bounds exceptions (falsey values)", "nothing, he strongly dislikes JavaScript"]];
 
 
 
