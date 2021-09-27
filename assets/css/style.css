@@ -41,7 +41,17 @@ header{
 }
 
 #desc-container{
-    /*border: solid black 5px;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: stretch;
+
+}
+
+#desc-container button{
+    min-width: 200px;
+    min-height: 40px;
+    margin: 30px auto 30px auto;
 }
 
 #bottom-container{
@@ -57,6 +67,7 @@ header{
 #bottom-container button{
     width:10%;
     height: 60%;
+    margin: 0px 20px 0px 20px;
 }
     
 

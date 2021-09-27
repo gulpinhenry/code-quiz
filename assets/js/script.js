@@ -16,9 +16,6 @@ var botContainer = document.getElementById("bottom-container");
 var highScores = document.getElementById("high-scores");
 
 
-
-
-
 var timeLeft = 60;
 var finishedTime = 0;
 var clicked = false; //checks to see if options are clicked
@@ -27,7 +24,7 @@ var timer;
 
 
 //create list of questions
-var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
+var arr = [["q1", "real ans", "choice 1111111111111111111111111111111111111111111111111111111111111111111111", "choice 2", "choice 3", "choice 4"],
 ["q2", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
 ,["q3", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
 ,["q4", "ans2", "ans2", "choice 2", "choice 3", "choice 4"]
@@ -41,7 +38,7 @@ var arr = [["q1", "real ans", "choice 1", "choice 2", "choice 3", "choice 4"],
 
 
 function renderQuiz(i){
-    //clearContainer();
+    clearContainer();
     title.textContent = arr[i][0];
     //add buttons to dom
     var a = document.createElement("button");
@@ -97,20 +94,11 @@ function renderQuiz(i){
         c.remove();
         d.remove();
         checkAnswer(ans);
-    }); 
-
-    //ans = arr[i][1]; //temporary
-    
-    
+    });    
 }
 function checkAnswer(ans){
     var feedback = document.createElement("h3");
     feedback.setAttribute("id", "feedback");
-    if(timeLeft<=0){ //not sure where to put this, this is when the user runs out of time while in the middle of the quiz
-        finishedTime = 0;
-        displayForm();
-    }
-
     if(arr[currentQuestion][1] == ans){
         feedback.textContent = "correct!";
         var correct = new Audio("./assets/images/correct.wav");
@@ -145,20 +133,16 @@ function endQuiz(){
     time.textContent = "Time left: --";
     displayForm(); 
 }
-// redo logic of quiz
+
+//starts the quiz
 function startQuiz(){
     highScores.disabled = true;
     console.log("Game started");
     //render buttons, render question, get rid of all of the stuff on there
     renderQuiz(currentQuestion);
-    //if the user finishes before time hits 0
-      
-    //in the event that the user finishes before the time runs out   
 }
 
-
-
-// just a function for debugging purposes, to clear all containers
+// resets the containers
 function clearContainer(){
     title.textContent = "";
     descContainer.innerHTML = '';
@@ -166,7 +150,6 @@ function clearContainer(){
 
 }
 
-// logic of the ending of the quiz, if the quiz is finished before the actual time limit, you need to display form then, as well if the quiz is not finished in time
 
 /**
  * displays the form which prompts the user for their initials, as saves their respective time to under their initials, which will be updated to leaderboard
@@ -190,8 +173,6 @@ function displayForm(){
     submit.setAttribute("id", "submit-button");
     submit.value = "ok";
 
-
-
     botContainer.appendChild(form);
     form.appendChild(formLabel);
     form.appendChild(initials);
@@ -204,9 +185,9 @@ function displayForm(){
         }
             
     });
-
 }
 
+//displays the high scores panel
 function displayHighScores(){
     clearContainer();
     title.textContent = "High Scores";
@@ -218,6 +199,9 @@ function displayHighScores(){
     back.textContent = "back";
     botContainer.appendChild(back);
     highScores.disabled = true;
+    var clear = document.createElement("button");
+    clear.textContent = "clear scores";
+    botContainer.appendChild(clear);
     //display list
     for (var i = 0; i < localStorage.length; i++){
         if(localStorage.key(i).length == 2) //displays only initials
@@ -229,14 +213,14 @@ function displayHighScores(){
         }
         
     }
-  
-    
-      
-    
     //when the start button is clicked, the timer starts and the button disappears
     back.addEventListener("click", function(){
         displayHome();
         back.remove();
+    });
+    clear.addEventListener("click", function(){
+        localStorage.clear();
+        displayHighScores();
     });
 }
 
