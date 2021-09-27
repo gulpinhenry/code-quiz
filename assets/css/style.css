@@ -1,7 +1,7 @@
 *{
     font-family: 'Lucida Console', 'Monaco', monospace;
     color: #F0A500;
-    background-color: #082032;
+    background-color: #334756;
 }
 
 header{
@@ -23,7 +23,7 @@ header{
     width: 900px;
     transform: translate(-50%, -50%);
     border: solid #082032 5px;
-    background-color: #334756;
+    background-color: #082032;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -35,13 +35,13 @@ header{
     font-size: 40px;
     font-weight: bold;
     margin: 20px auto 40px auto;
-    background-color: #334756;
+    background-color: #082032;
 }
 #description{
     font-size: 30px;
     margin: 0px 40px 30px 40px;
     text-align: center;
-    background-color: #334756;
+    background-color: #082032;
 }
 
 #desc-container{
@@ -49,7 +49,7 @@ header{
     flex-direction: column;
     justify-content: space-evenly;
     align-items: stretch;
-    background-color: #334756;
+    background-color: #082032;
 
 }
 
@@ -60,14 +60,17 @@ header{
 }
 
 #bottom-container{
-    /*border: solid black 5px;*/
-    background-color: #334756;
+    background-color: #082032;
     margin-top: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 10%;
+}
+
+#feedback{
+    color:white;
 }
 
 #bottom-container button{
@@ -87,13 +90,13 @@ button:hover, #submit-button:hover {
   }
 
 li{
-    background-color: #334756;
+    background-color: #082032;
     padding: 10px 0px 10px 0px;
     text-align: left;
 }
 /* for initials*/
 .results{
-    background-color: #334756;
+    background-color: #082032;
     border: none;
     font-size: 24px;
 }

@@ -99,6 +99,7 @@ function renderQuiz(i){
 function checkAnswer(ans){
     var feedback = document.createElement("h3");
     feedback.setAttribute("id", "feedback");
+    
     if(arr[currentQuestion][1] == ans){
         feedback.textContent = "correct!";
         var correct = new Audio("./assets/images/correct.wav");
@@ -110,16 +111,15 @@ function checkAnswer(ans){
         var incorrect = new Audio("./assets/images/incorrect.wav");
         incorrect.play();
     }
-    //keeps the feedback there for a bit
-    setTimeout(function(){ feedback.remove();
-    }, 500);
-    botContainer.appendChild(feedback);
-    if(currentQuestion<arr.length-1)
-    {
+    console.log(feedback.textContent);  
+    
+    setTimeout(function(){botContainer.appendChild(feedback)}, 0);
+    setTimeout(function(){feedback.remove();}, 1000);
+    
+    if(currentQuestion<arr.length-1){
         renderQuiz(++currentQuestion);
     }
-    else
-    {
+    else{
         endQuiz();
     }
         
