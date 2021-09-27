@@ -164,11 +164,17 @@ function displayForm(){
     var initials = document.createElement("input");
     var submit = document.createElement("input");
 
+    finScore.setAttribute("class", "results");
+    formLabel.setAttribute("class", "results");
+    initials.setAttribute("class", "results");
+    submit.setAttribute("class", "results");
+
     finScore.textContent = "Score: " + finishedTime;
     descContainer.appendChild(finScore);
 
     formLabel.textContent = "Enter Initials (2 letters): "
     initials.setAttribute("type", "text");
+    initials.setAttribute("id", "input");
     submit.setAttribute("type", "submit");
     submit.setAttribute("id", "submit-button");
     submit.value = "ok";

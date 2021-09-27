@@ -19,7 +19,7 @@
   - [Questions](#questions)
 
 ## About the Project
- A mini JavaScript-themed quiz designed to experiment with utilizing Web APIs in JavaScript to apply in HTML and CSS.
+ A mini JavaScript-themed quiz designed to experiment with utilizing Web APIs in JavaScript to apply in HTML and CSS. In this project I learn to traverse the DOM and make changes to HTML and CSS using JavaScript.
 
  ![Screencapture]() //insert ss here
 
